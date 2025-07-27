@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-mvc-app
+    volumes:
+      - .:/var/www
+    ports:
+        - "8000:8000"  # ánh xạ container:host
+#    depends_on:
+#      - mysql
+    networks:
+      - mvc_network
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx-mvc-server
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - .:/var/www
+#      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+#    depends_on:
+#      - app
+#    networks:
+#      - mvc_network
+#
+#  mysql:
+#    image: mysql:8.0
+#    container_name: mysql-mvc
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "@Dat12345"
+#      MYSQL_DATABASE: school
+#    ports:
+#      - "3307:3306"
+#    volumes:
+#      - db_data:/var/lib/mysql
+#    networks:
+#      - mvc_network
+
+#volumes:
+#  db_data:
+networks:
+  mvc_network:
+    driver: bridge
